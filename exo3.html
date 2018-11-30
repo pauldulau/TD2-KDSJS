@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Kit de Survie JS</title>
+    <meta name="description" content="">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <style>
+        body{ font-family: 'Quicksand', sans-serif; }
+
+
+    </style>
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#bouton").click(function()
+            {
+                var nb = $("#texte").val();
+                $.ajax({
+                    url: "http://www.labri.fr/perso/pbiasutt/Cours/KDJS/TD02/functions.php",
+                    dataType: "Script",
+                    beforeSend: function()
+                    {
+                      console.log('Envoi de la requete...');
+                    },
+                    complete: function(data)
+                    {
+                        console.log('Reponse reçue');
+                        console.log(data);
+                        if(isPrime(nb))
+                        {
+                            $("#conteneur").text("Ce nombre est premier");
+                        }
+                        else
+                        {
+                            $("#conteneur").text("Ce nombre n'est pas premier");
+                        }
+                    },
+                    method: "GET"
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <form>
+            <input id="texte" type="text">
+            <input id="bouton" type="button" value="Soumettre">
+        </form>
+        <div id="conteneur"></div>
+    </div>
+</body>
+
+</html>
